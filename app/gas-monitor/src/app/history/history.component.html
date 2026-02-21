@@ -1,0 +1,80 @@
+<div class="wrap">
+  <header class="head">
+    <div class="head-left">
+      <div class="chip">Firebase • Historique</div>
+      <h1>Historique</h1>
+      
+    </div>
+
+    <div class="head-right">
+      <a routerLink="/" class="btn ghost">← Dashboard</a>
+      <a routerLink="/settings" class="btn ghost">Réglages</a>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="card stat" *ngIf="(warn$ | async) as warn">
+      <div class="label">SEUIL WARN ACTIF</div>
+      <div class="value mono">{{ warn }}</div>
+     
+    </div>
+
+    <div class="card stat" *ngIf="historyFiltered$ | async as items">
+      <div class="label">ÉVÉNEMENTS</div>
+      <div class="value mono">{{ items.length }}</div>
+      
+    </div>
+  </section>
+
+  <section class="card table-card" *ngIf="historyFiltered$ | async as items">
+    <div class="table-head">
+      <div>
+        <div class="label">TABLE</div>
+        <h2>Événements détectés</h2>
+      </div>
+
+      <div class="legend">
+        <span class="pill ok">OK</span>
+        <span class="pill warn">WARN</span>
+        <span class="pill alert">ALERT</span>
+      </div>
+    </div>
+
+    <div class="table-wrap" *ngIf="items.length > 0; else empty">
+      <table>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>ADC</th>
+            <th>Indice</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let it of items">
+            <td class="mono">{{ it.ts }}</td>
+            <td class="mono">{{ it.adc }}</td>
+            <td><span class="index-chip">{{ it.index }}</span></td>
+            <td>
+              <span
+                class="status"
+                [class.ok]="it.status === 'OK'"
+                [class.warn]="it.status === 'WARN'"
+                [class.alert]="it.status === 'ALERT'"
+              >
+                {{ it.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #empty>
+      <div class="empty">
+        <div class="empty-title">Aucune mesure trouvée</div>
+      </div>
+    </ng-template>
+  </section>
+</div>

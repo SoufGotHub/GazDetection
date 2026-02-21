@@ -1,0 +1,79 @@
+<div class="wrap">
+  <header class="head">
+    <div class="head-left">
+      <div class="chip">Firebase • Configuration</div>
+      <h1>Réglages</h1>
+      <p class="subtitle">Modifie les seuils WARN/ALERT utilisés par le Dashboard.</p>
+    </div>
+
+    <div class="head-right">
+      <a class="btn ghost" routerLink="/">← Dashboard</a>
+      <a class="btn ghost" routerLink="/history">Historique</a>
+    </div>
+  </header>
+
+  <!-- Loading -->
+  <section class="card" *ngIf="loading; else formTpl">
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>
+        <div class="loading-title">Chargement des réglages…</div>
+        <div class="loading-sub">Lecture depuis Firebase.</div>
+      </div>
+    </div>
+  </section>
+
+  <ng-template #formTpl>
+    <section class="card">
+      <div class="card-head">
+        <div>
+          <div class="label">SEUILS</div>
+          <h2>Détection</h2>
+          <p class="muted small">ALERT doit être strictement supérieur à WARN.</p>
+        </div>
+        <span class="chip">Temps réel</span>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="warn">Seuil WARN</label>
+          <input id="warn" type="number" [(ngModel)]="warn" min="1" max="99" />
+          <div class="hint">État <b>WARN</b> quand index ≥ {{ warn }}</div>
+        </div>
+
+        <div class="field">
+          <label for="alert">Seuil ALERT</label>
+          <input id="alert" type="number" [(ngModel)]="alert" min="1" max="100" />
+          <div class="hint">État <b>ALERT</b> quand index ≥ {{ alert }}</div>
+        </div>
+      </div>
+
+      <div class="preview">
+        <div class="pill warn">
+          WARN ≥ <b class="mono">{{ warn }}</b>
+        </div>
+        <div class="pill alert">
+          ALERT ≥ <b class="mono">{{ alert }}</b>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" (click)="save()" [disabled]="saving">
+          {{ saving ? 'Enregistrement…' : 'Enregistrer' }}
+        </button>
+
+        <button class="btn ghost" (click)="resetDefaults()" [disabled]="saving">
+          Remettre par défaut
+        </button>
+      </div>
+
+      <div *ngIf="msg" class="msg" [class.ok]="msg.type==='ok'" [class.err]="msg.type==='err'">
+        {{ msg.text }}
+      </div>
+
+      <div class="note">
+        <b>Conseil :</b> après modification, le Dashboard et l’Historique utilisent automatiquement les nouveaux seuils.
+      </div>
+    </section>
+  </ng-template>
+</div>

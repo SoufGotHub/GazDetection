@@ -1,0 +1,343 @@
+/* Page background */
+.page {
+  min-height: 100vh;
+  background: radial-gradient(1200px 500px at 20% 10%, rgba(64, 140, 255, 0.18), transparent 60%),
+              radial-gradient(900px 400px at 80% 20%, rgba(255, 80, 80, 0.14), transparent 55%),
+              #0b1020;
+  padding: 22px 0 40px;
+}
+
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 16px;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #eaf0ff;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  font-weight: 800;
+  font-size: 12px;
+  color: #dbe6ff;
+}
+
+h1 {
+  margin: 10px 0 0;
+  font-size: 30px;
+  letter-spacing: -0.4px;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: rgba(234,240,255,0.72);
+}
+
+.head-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: rgba(234,240,255,0.85);
+  font-weight: 800;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #34d399;
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.15);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 980px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Cards (glass) */
+.card {
+  border-radius: 18px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+}
+
+.card-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.label {
+  color: rgba(234,240,255,0.62);
+  font-size: 12px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.2px;
+}
+
+.muted { color: rgba(234,240,255,0.72); }
+.small { font-size: 13px; }
+
+/* Buttons */
+.btn {
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.12);
+  color: #eaf0ff;
+  font-weight: 900;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:hover { background: rgba(255,255,255,0.16); }
+
+.btn.ghost {
+  background: rgba(255,255,255,0.06);
+}
+
+.btn.danger {
+  border-color: rgba(255,80,80,0.45);
+  background: rgba(255,80,80,0.18);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.full { width: 100%; }
+
+/* Live */
+.card-live .card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+}
+
+.badge.ok { border-color: rgba(52, 211, 153, 0.55); background: rgba(52, 211, 153, 0.14); }
+.badge.warn { border-color: rgba(251, 191, 36, 0.55); background: rgba(251, 191, 36, 0.14); }
+.badge.alert { border-color: rgba(248, 113, 113, 0.65); background: rgba(248, 113, 113, 0.16); }
+.badge.neutral { border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.06); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(203, 177, 177, 0.12);
+  background: rgba(255,255,255,0.04);
+  font-weight: 800;
+  font-size: 12px;
+  color: rgba(234,240,255,0.82);
+}
+
+.kpi {
+  text-align: right;
+}
+
+.kpi-label {
+  color: rgba(234,240,255,0.62);
+  font-size: 12px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.kpi-value {
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -1px;
+}
+
+.kpi-hint {
+  margin-top: 6px;
+  color: rgba(234,240,255,0.70);
+  font-size: 13px;
+}
+
+.meta {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 10px;
+}
+@media (max-width: 980px) {
+  .meta { grid-template-columns: repeat(2, 1fr); }
+}
+
+.meta-item {
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.meta-k {
+  color: rgba(234,240,255,0.62);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .10em;
+}
+
+.meta-v {
+  margin-top: 6px;
+  font-weight: 900;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Chart */
+.chart canvas {
+  width: 100% !important;
+  max-height: 320px;
+}
+
+/* Actions */
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.note {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: rgba(234,240,255,0.78);
+}
+
+/* Alert */
+.alert {
+  display: none;
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,80,80,0.55);
+  background: rgba(255,80,80,0.14);
+  box-shadow: 0 18px 60px rgba(255,80,80,0.15);
+  align-items: center;
+  gap: 12px;
+}
+
+.alert.show {
+  display: flex;
+  animation: pulse 1.1s infinite;
+}
+
+.alert.test {
+  border-color: rgba(251,191,36,0.55);
+  background: rgba(251,191,36,0.12);
+  box-shadow: 0 18px 60px rgba(251,191,36,0.12);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateY(0); filter: brightness(1); }
+  50% { transform: translateY(-1px); filter: brightness(0.92); }
+}
+
+.alert-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.alert-title {
+  font-size: 16px;
+  font-weight: 950;
+}
+
+.alert-sub {
+  margin-top: 4px;
+  color: rgba(234,240,255,0.78);
+}
+
+.alert-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Remove your old global button style
+   IMPORTANT: do NOT keep `button { ... }` from old CSS,
+   it would override .btn */

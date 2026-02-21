@@ -1,0 +1,35 @@
+<div class="page">
+  <div class="wrap">
+
+    <header class="header">
+      <div class="brand">
+        <div class="logo">⚠️</div>
+        <div class="brand-text">
+          <div class="title">Système de Détection de Gaz</div>
+          <div class="subtitle">ESP32 • MQ-2 • Firebase • Angular</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Dashboard
+        </a>
+        <a routerLink="/history" routerLinkActive="active">Historique</a>
+        <a routerLink="/settings" routerLinkActive="active">Réglages</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+
+    <footer class="footer">
+      <span>© {{ year }} • Projet Objets connectés • @Miali_Mebrouk</span>
+    </footer>
+
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div class="page">
+  <div class="wrap">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="head-left">
+        <div class="app-badge">MQ-2 • ESP32</div>
+        <h1>Gas Monitor</h1>
+        <p class="subtitle"></p>
+      </div>
+
+      <div class="head-right">
+        <div class="status-pill">
+          <span class="dot"></span>
+          Firebase <b>connecté</b>
+        </div>
+
+        <a class="btn ghost" routerLink="/history">Historique</a>
+        <a class="btn ghost" routerLink="/settings">Réglages</a>
+        <button class="btn" (click)="testAlert()">Tester alerte</button>
+      </div>
+    </header>
+
+    <!-- Alert banner (ALERT Firebase ou test) -->
+    <section
+      class="alert"
+      *ngIf="(latest$ | async) as latest"
+      [class.show]="latest.status === 'ALERT' || isTestAlert"
+      [class.test]="isTestAlert"
+    >
+      <div class="alert-icon">⚠️</div>
+
+      <div class="alert-body">
+        <div class="alert-title">
+          {{ isTestAlert ? 'TEST ALERTE (local)' : 'ALERTE GAZ / FUMÉE DÉTECTÉE' }}
+        </div>
+        <div class="alert-sub">
+          Indice <b>{{ latest.index }}</b> • ADC <b>{{ latest.adc }}</b>
+        </div>
+      </div>
+
+      <div class="alert-actions">
+        <button class="btn ghost" (click)="enableSound()" [disabled]="soundEnabled">
+          {{ soundEnabled ? 'Son activé' : 'Activer le son' }}
+        </button>
+        <button class="btn danger" (click)="stopAlarm()">
+          Couper l’alarme
+        </button>
+      </div>
+    </section>
+
+    <!-- Grid -->
+    <div class="grid">
+
+      <!-- Live card -->
+      <section class="card card-live" *ngIf="latest$ | async as latest; else empty">
+        <div class="card-top">
+          <div>
+            <div class="label">STATUT</div>
+            <div class="status-row">
+              <span class="badge" [ngClass]="{
+                'ok': (statusUI$ | async) === 'OK',
+                'warn': (statusUI$ | async) === 'WARN',
+                'alert': (statusUI$ | async) === 'ALERT'
+              }">
+                {{ (statusUI$ | async) || latest.status }}
+              </span>
+
+              <span class="chip">Seuils dynamiques</span>
+            </div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label">Indice</div>
+            <div class="kpi-value">{{ latest.index }}</div>
+            <div class="kpi-hint">0–100 (indice relatif)</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="meta-item">
+            <div class="meta-k">ADC</div>
+            <div class="meta-v mono">{{ latest.adc }}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-k">Timestamp</div>
+            <div class="meta-v mono">{{ latest.ts }}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-k">Warn</div>
+            <div class="meta-v mono">{{ latest.warn ?? '—' }}</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-k">Alert</div>
+            <div class="meta-v mono">{{ latest.alert ?? '—' }}</div>
+          </div>
+        </div>
+      </section>
+
+      <ng-template #empty>
+        <section class="card card-live">
+          <div class="card-top">
+            <div>
+              <div class="label">STATUT</div>
+              <span class="badge neutral">Aucune mesure</span>
+            </div>
+
+            <div class="kpi">
+              <div class="kpi-label">Indice</div>
+              <div class="kpi-value">—</div>
+              
+            </div>
+          </div>
+
+          
+        </section>
+      </ng-template>
+
+      <!-- Thresholds card -->
+      <section class="card" *ngIf="config$ | async as cfg">
+        <div class="card-title">
+          <div>
+            <div class="label">SEUILS</div>
+            <h2>Configuration</h2>
+          </div>
+          <span class="chip">Firebase</span>
+        </div>
+
+        <div class="rows">
+          <div class="rowline">
+            <span>WARN</span>
+            <b class="mono">{{ cfg.warn }}</b>
+          </div>
+          <div class="rowline">
+            <span>ALERT</span>
+            <b class="mono">{{ cfg.alert }}</b>
+          </div>
+        </div>
+
+        <p class="muted small"></p>
+
+        <a class="btn ghost full" routerLink="/settings">Modifier les seuils</a>
+      </section>
+
+      <!-- Chart card -->
+      <section class="card chart">
+        <div class="card-title">
+          <div>
+            <div class="label">GRAPHE</div>
+            <h2>Temps réel</h2>
+          </div>
+          <span class="chip">index ≥ WARN</span>
+        </div>
+
+        <canvas #gasChart></canvas>
+      </section>
+
+      <!-- Actions card -->
+      <section class="card">
+        <div class="card-title">
+          <div>
+            <div class="label">ACTIONS</div>
+            <h2>Navigation</h2>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn ghost full" routerLink="/history">Voir l’historique</a>
+          <a class="btn ghost full" routerLink="/settings">Réglages seuils</a>
+          <button class="btn full" (click)="testAlert()">Tester une alerte</button>
+        </div>
+
+        <div class="note">
+          <b>Astuce :</b> Active le son une fois (navigateur) pour entendre l’alarme.
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
