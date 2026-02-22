@@ -11,7 +11,7 @@ export const appConfig: ApplicationConfig = {
 
     provideFirebaseApp(() =>
       initializeApp({
-        apiKey: "AIzaSyAuNtJbHQGZWyrntux9vpiDpPMX7XCf-20",
+        apiKey: "API_KEY",
         authDomain: "gazdetector-85aba.firebaseapp.com",
         databaseURL: "https://gazdetector-85aba-default-rtdb.europe-west1.firebasedatabase.app",
         projectId: "gazdetector-85aba",
